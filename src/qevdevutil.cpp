@@ -47,12 +47,12 @@ ParsedSpecification parseSpecification(const QString &specification)
 {
     ParsedSpecification result;
 
-    result.args = specification.splitRef(QLatin1Char(':'));
+    result.args = specification.split(QLatin1Char(':'));
 
-    for (const QStringRef &arg : qAsConst(result.args)) {
+    for (const QString &arg : qAsConst(result.args)) {
         if (arg.startsWith(QLatin1String("/dev/"))) {
             // if device is specified try to use it
-            result.devices.append(arg.toString());
+            result.devices.append(arg);
         } else {
             // build new specification without /dev/ elements
             result.spec += arg + QLatin1Char(':');

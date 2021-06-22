@@ -224,7 +224,11 @@ bool QDeviceDiscoveryUDev::checkDeviceType(udev_device *dev)
 
     if ((m_types & Device_Keyboard) && (qstrcmp(udev_device_get_property_value(dev, "ID_INPUT_KEYBOARD"), "1") == 0 )) {
         const QString capabilities_key = QString::fromUtf8(udev_device_get_sysattr_value(dev, "capabilities/key"));
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+        const auto val = capabilities_key.split(QLatin1Char(' '), Qt::SkipEmptyParts);
+#else
         const auto val = capabilities_key.splitRef(QLatin1Char(' '), QString::SkipEmptyParts);
+#endif
         if (!val.isEmpty()) {
             bool ok;
             unsigned long long keys = val.last().toULongLong(&ok, 16);

@@ -116,10 +116,10 @@ std::unique_ptr<QEvdevKeyboardHandler> QEvdevKeyboardHandler::create(const QStri
     bool enableCompose = false;
     int grab = 0;
 
-    const auto args = specification.splitRef(QLatin1Char(':'));
-    for (const QStringRef &arg : args) {
+    const auto args = specification.split(QLatin1Char(':'));
+    for (const auto &arg : args) {
         if (arg.startsWith(QLatin1String("keymap=")))
-            keymapFile = arg.mid(7).toString();
+            keymapFile = arg.mid(7);
         else if (arg == QLatin1String("disable-zap"))
             disableZap = true;
         else if (arg == QLatin1String("enable-compose"))
