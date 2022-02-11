@@ -167,7 +167,7 @@ void QEvdevKeyboardHandler::switchLed(int led, bool state)
 
 void QEvdevKeyboardHandler::readKeycode()
 {
-    struct ::input_event buffer[32];
+    struct ::input_event buffer[256];
     int n = 0;
 
     forever {
