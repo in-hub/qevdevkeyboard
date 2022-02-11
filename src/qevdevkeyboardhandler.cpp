@@ -197,6 +197,8 @@ void QEvdevKeyboardHandler::readKeycode()
 
     n /= sizeof(buffer[0]);
 
+    qCDebug(qLcEvdevKey, "readKeycode: read %d events", n);
+
     for (int i = 0; i < n; ++i) {
         if (buffer[i].type != EV_KEY)
             continue;
