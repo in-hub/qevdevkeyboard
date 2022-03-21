@@ -200,6 +200,9 @@ void QEvdevKeyboardHandler::readKeycode()
     qCDebug(qLcEvdevKey, "readKeycode: read %d events", n);
 
     for (int i = 0; i < n; ++i) {
+        if (buffer[i].type == EV_SYN && buffer[i].code == SYN_DROPPED)
+            qCWarning(qLcEvdevKey) << "input events dropped by kernel!";
+
         if (buffer[i].type != EV_KEY)
             continue;
 
