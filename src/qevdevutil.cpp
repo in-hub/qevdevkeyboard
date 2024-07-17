@@ -49,7 +49,7 @@ ParsedSpecification parseSpecification(const QString &specification)
 
     result.args = specification.split(QLatin1Char(':'));
 
-    for (const QString &arg : qAsConst(result.args)) {
+    for (const QString &arg : std::as_const(result.args)) {
         if (arg.startsWith(QLatin1String("/dev/"))) {
             // if device is specified try to use it
             result.devices.append(arg);
